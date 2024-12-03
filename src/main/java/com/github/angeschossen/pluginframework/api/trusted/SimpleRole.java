@@ -3,7 +3,7 @@ package com.github.angeschossen.pluginframework.api.trusted;
 import com.github.angeschossen.pluginframework.api.roles.settings.ManagementSetting;
 import com.github.angeschossen.pluginframework.api.roles.settings.RoleSetting;
 import com.github.angeschossen.pluginframework.api.roles.settings.Setting;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
