@@ -37,12 +37,14 @@ public enum SimpleRole {
         return map.getOrDefault(id, MEMBER);
     }
 
-    public void allow(ManagementFlag... flags) {
-        managementFlags.addAll(Arrays.asList(flags));
+    public SimpleRole allow(ManagementFlag flag) {
+        managementFlags.add(flag);
+        return this;
     }
 
-    public void allow(ActionFlag... flags) {
-        actionFlags.addAll(Arrays.asList(flags));
+    public SimpleRole allow(ActionFlag flag) {
+        actionFlags.add(flag);
+        return this;
     }
 
     public boolean canManagement(Player player, ManagementFlag managementFlag) {
