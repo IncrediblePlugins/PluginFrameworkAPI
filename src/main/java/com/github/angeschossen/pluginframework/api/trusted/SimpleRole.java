@@ -1,8 +1,8 @@
 package com.github.angeschossen.pluginframework.api.trusted;
 
-import com.github.angeschossen.pluginframework.api.roles.settings.ManagementSetting;
-import com.github.angeschossen.pluginframework.api.roles.settings.RoleSetting;
-import com.github.angeschossen.pluginframework.api.roles.settings.Setting;
+import com.github.angeschossen.pluginframework.api.roles.flags.ManagementFlag;
+import com.github.angeschossen.pluginframework.api.roles.flags.ActionFlag;
+import com.github.angeschossen.pluginframework.api.roles.flags.Flag;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -24,8 +24,8 @@ public enum SimpleRole {
     }
 
     private final int id, priority;
-    private Set<ManagementSetting> managementSettings = new HashSet<>();
-    private Set<RoleSetting> roleSettings = new HashSet<>();
+    private Set<ManagementFlag> managementFlags = new HashSet<>();
+    private Set<ActionFlag> actionFlags = new HashSet<>();
     private String name;
     private String name_plain;
 
@@ -40,20 +40,20 @@ public enum SimpleRole {
         return map.getOrDefault(id, MEMBER);
     }
 
-    public void allow(ManagementSetting managementSetting) {
-        managementSettings.add(managementSetting);
+    public void allow(ManagementFlag managementFlag) {
+        managementFlags.add(managementFlag);
     }
 
-    public void allow(RoleSetting roleSetting) {
-        roleSettings.add(roleSetting);
+    public void allow(ActionFlag actionFlag) {
+        actionFlags.add(actionFlag);
     }
 
-    public boolean canManagement(Player player, ManagementSetting managementSetting) {
-        return hasManagement(managementSetting) || player.hasPermission(managementSetting.getBypassPermission());
+    public boolean canManagement(Player player, ManagementFlag managementFlag) {
+        return hasManagement(managementFlag) || player.hasPermission(managementFlag.getBypassPermission());
     }
 
-    public boolean canRoleSetting(Player player, RoleSetting roleSetting) {
-        return hasRoleSetting(roleSetting) || player.hasPermission(roleSetting.getBypassPermission());
+    public boolean canRoleSetting(Player player, ActionFlag actionFlag) {
+        return hasRoleSetting(actionFlag) || player.hasPermission(actionFlag.getBypassPermission());
     }
 
     public SimpleRole getDemote() {
@@ -89,19 +89,19 @@ public enum SimpleRole {
         return role != OWNER ? role : null;
     }
 
-    public boolean hasManagement(ManagementSetting managementSetting) {
-        return managementSettings.contains(managementSetting);
+    public boolean hasManagement(ManagementFlag managementFlag) {
+        return managementFlags.contains(managementFlag);
     }
 
-    public boolean hasRoleSetting(RoleSetting roleSetting) {
-        return roleSettings.contains(roleSetting);
+    public boolean hasRoleSetting(ActionFlag actionFlag) {
+        return actionFlags.contains(actionFlag);
     }
 
-    public void setManagementSettings(Set<? extends Setting> managementSettings) {
-        this.managementSettings = (Set<ManagementSetting>) managementSettings;
+    public void setManagementSettings(Set<? extends Flag> managementSettings) {
+        this.managementFlags = (Set<ManagementFlag>) managementSettings;
     }
 
-    public void setRoleSettings(Set<? extends Setting> roleSettings) {
-        this.roleSettings = (Set<RoleSetting>) roleSettings;
+    public void setRoleSettings(Set<? extends Flag> roleSettings) {
+        this.actionFlags = (Set<ActionFlag>) roleSettings;
     }
 }

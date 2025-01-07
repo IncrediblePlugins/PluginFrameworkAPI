@@ -1,3 +1,7 @@
+group = "com.github.angeschossen"
+version = "1.1.0"
+description = "PluginFrameworkAPI"
+
 plugins {
     `java-library`
     `maven-publish`
@@ -39,11 +43,6 @@ java {
     withSourcesJar()
     withJavadocJar()
 }
-
-group = "com.github.angeschossen"
-version = "1.0.32"
-description = "PluginFrameworkAPI"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
