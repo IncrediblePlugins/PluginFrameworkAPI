@@ -1,8 +1,8 @@
 package com.github.angeschossen.pluginframework.api.trusted;
 
-import com.github.angeschossen.pluginframework.api.flags.ManagementFlag;
-import com.github.angeschossen.pluginframework.api.flags.ActionFlag;
-import com.github.angeschossen.pluginframework.api.flags.Flag;
+import com.github.angeschossen.pluginframework.api.flags.roles.ManagementFlag;
+import com.github.angeschossen.pluginframework.api.flags.roles.ActionFlag;
+import com.github.angeschossen.pluginframework.api.flags.roles.RoleFlag;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -97,11 +97,11 @@ public enum SimpleRole {
         return actionFlags.contains(actionFlag);
     }
 
-    public void setManagementSettings(Set<? extends Flag> managementSettings) {
+    public void setManagementSettings(Set<? extends RoleFlag> managementSettings) {
         this.managementFlags = (Set<ManagementFlag>) managementSettings;
     }
 
-    public void setRoleSettings(Set<? extends Flag> roleSettings) {
+    public void setRoleSettings(Set<? extends RoleFlag> roleSettings) {
         this.actionFlags = (Set<ActionFlag>) roleSettings;
     }
 }

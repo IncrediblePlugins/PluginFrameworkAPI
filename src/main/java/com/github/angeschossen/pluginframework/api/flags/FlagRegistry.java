@@ -1,5 +1,8 @@
 package com.github.angeschossen.pluginframework.api.flags;
 
+import com.github.angeschossen.pluginframework.api.flags.roles.ActionFlag;
+import com.github.angeschossen.pluginframework.api.flags.roles.RoleFlag;
+import com.github.angeschossen.pluginframework.api.flags.roles.ManagementFlag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,8 +14,8 @@ public interface FlagRegistry<A extends ActionFlag, B extends ManagementFlag> {
 
     @NotNull Collection<B> getManagementFlags();
 
-    @Nullable Flag getFlagByName(@NotNull String name);
+    @Nullable RoleFlag getFlagByName(@NotNull String name);
 
     @NotNull
-    <T extends Flag> T registerFlag(@NotNull T flag) throws IllegalArgumentException;
+    <T extends RoleFlag> T registerFlag(@NotNull T flag) throws IllegalArgumentException;
 }

@@ -1,4 +1,4 @@
-package com.github.angeschossen.pluginframework.api.flags;
+package com.github.angeschossen.pluginframework.api.flags.roles;
 
 import com.github.angeschossen.pluginframework.api.player.PlayerData;
 import com.github.angeschossen.pluginframework.api.utils.Checks;
@@ -6,12 +6,12 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class Flag {
+public abstract class RoleFlag {
 
     protected final @NotNull Plugin plugin;
     protected final @NotNull String name;
 
-    protected Flag(@NotNull Plugin plugin, @NotNull String name) {
+    protected RoleFlag(@NotNull Plugin plugin, @NotNull String name) {
         this.plugin = Checks.requireNonNull(plugin, "plugin");
         this.name = Checks.requireNonNull(name, "name");
     }
