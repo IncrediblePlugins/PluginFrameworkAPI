@@ -1,12 +1,15 @@
 package com.github.angeschossen.pluginframework.api.trusted;
 
-import com.github.angeschossen.pluginframework.api.flags.roles.ManagementFlag;
 import com.github.angeschossen.pluginframework.api.flags.roles.ActionFlag;
+import com.github.angeschossen.pluginframework.api.flags.roles.ManagementFlag;
 import com.github.angeschossen.pluginframework.api.flags.roles.RoleFlag;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public enum SimpleRole {
 

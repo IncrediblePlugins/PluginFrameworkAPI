@@ -2,6 +2,7 @@ package com.github.angeschossen.pluginframework.api.flags.roles;
 
 import com.github.angeschossen.pluginframework.api.player.PlayerData;
 import com.github.angeschossen.pluginframework.api.utils.Checks;
+import com.github.angeschossen.pluginframework.api.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +15,7 @@ public abstract class RoleFlag {
 
     protected RoleFlag(@NotNull Plugin plugin, @NotNull String name) {
         this.plugin = Checks.requireNonNull(plugin, "plugin");
-        this.name = Checks.requireNonNull(name, "name");
+        this.name = StringUtils.toLowerCase(Checks.requireNonNull(name, "name"));
     }
 
     public void sendDeniedMessage(@NotNull PlayerData playerData, @Nullable String[] strings, @Nullable String[] strings1) {

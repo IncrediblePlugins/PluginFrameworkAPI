@@ -1,8 +1,8 @@
 package com.github.angeschossen.pluginframework.api.flags;
 
 import com.github.angeschossen.pluginframework.api.flags.roles.ActionFlag;
-import com.github.angeschossen.pluginframework.api.flags.roles.RoleFlag;
 import com.github.angeschossen.pluginframework.api.flags.roles.ManagementFlag;
+import com.github.angeschossen.pluginframework.api.flags.roles.RoleFlag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
