@@ -1,5 +1,5 @@
 group = "com.github.angeschossen"
-version = "1.1.5"
+version = "1.1.6"
 description = "PluginFrameworkAPI"
 
 plugins {

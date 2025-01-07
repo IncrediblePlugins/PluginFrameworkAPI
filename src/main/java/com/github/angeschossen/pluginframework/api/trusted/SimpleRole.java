@@ -6,10 +6,7 @@ import com.github.angeschossen.pluginframework.api.flags.roles.RoleFlag;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public enum SimpleRole {
 
@@ -40,12 +37,12 @@ public enum SimpleRole {
         return map.getOrDefault(id, MEMBER);
     }
 
-    public void allow(ManagementFlag managementFlag) {
-        managementFlags.add(managementFlag);
+    public void allow(ManagementFlag... flags) {
+        managementFlags.addAll(Arrays.asList(flags));
     }
 
-    public void allow(ActionFlag actionFlag) {
-        actionFlags.add(actionFlag);
+    public void allow(ActionFlag... flags) {
+        actionFlags.addAll(Arrays.asList(flags));
     }
 
     public boolean canManagement(Player player, ManagementFlag managementFlag) {
