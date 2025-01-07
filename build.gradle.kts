@@ -1,5 +1,5 @@
 group = "com.github.angeschossen"
-version = "1.1.4"
+version = "1.1.5"
 description = "PluginFrameworkAPI"
 
 plugins {
@@ -37,6 +37,7 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT")
     compileOnly("org.realityforge.org.jetbrains.annotations:org.jetbrains.annotations:1.7.0")
+    compileOnly("org.apache.commons:commons-lang3:3.17.0")
 }
 
 java {

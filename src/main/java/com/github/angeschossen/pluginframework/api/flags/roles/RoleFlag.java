@@ -2,6 +2,7 @@ package com.github.angeschossen.pluginframework.api.flags.roles;
 
 import com.github.angeschossen.pluginframework.api.player.PlayerData;
 import com.github.angeschossen.pluginframework.api.utils.Checks;
+import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,6 +15,28 @@ public abstract class RoleFlag {
     protected RoleFlag(@NotNull Plugin plugin, @NotNull String name) {
         this.plugin = Checks.requireNonNull(plugin, "plugin");
         this.name = Checks.requireNonNull(name, "name");
+    }
+
+    public void sendDeniedMessage(@NotNull PlayerData playerData, @Nullable String[] strings, @Nullable String[] strings1) {
+        String key = getMessageKey();
+        if (key == null) {
+            return;
+        }
+
+        String[] p, v;
+        if (strings != null && strings1 != null) {
+            p = ArrayUtils.addAll(getDefaultPlaceholders(), strings);
+            v = ArrayUtils.addAll(getDefaultPlaceholderValues(), strings1);
+        } else {
+            p = null;
+            v = null;
+        }
+
+        playerData.sendMessage(key, p, v);
+    }
+
+    protected @Nullable String getMessageKey(){
+        return null;
     }
 
     public final @NotNull Plugin getPlugin() {
@@ -43,6 +66,4 @@ public abstract class RoleFlag {
     protected final String[] getDefaultPlaceholderValues() {
         return new String[]{getName(), getBypassPermission()};
     }
-
-    public abstract void sendDeniedMessage(@NotNull PlayerData playerData, @Nullable String[] placeholders, @Nullable String[] values);
 }
