@@ -1,4 +1,4 @@
-package com.github.angeschossen.pluginframework.api.flags.roles;
+package com.github.angeschossen.pluginframework.api.flags;
 
 import com.github.angeschossen.pluginframework.api.player.PlayerData;
 import com.github.angeschossen.pluginframework.api.utils.Checks;

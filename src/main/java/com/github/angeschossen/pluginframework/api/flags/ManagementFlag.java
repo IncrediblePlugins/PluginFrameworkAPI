@@ -1,4 +1,4 @@
-package com.github.angeschossen.pluginframework.api.flags.roles;
+package com.github.angeschossen.pluginframework.api.flags;
 
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;

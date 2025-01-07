@@ -1,8 +1,8 @@
 package com.github.angeschossen.pluginframework.api.trusted;
 
-import com.github.angeschossen.pluginframework.api.flags.roles.ManagementFlag;
-import com.github.angeschossen.pluginframework.api.flags.roles.ActionFlag;
-import com.github.angeschossen.pluginframework.api.flags.roles.Flag;
+import com.github.angeschossen.pluginframework.api.flags.ManagementFlag;
+import com.github.angeschossen.pluginframework.api.flags.ActionFlag;
+import com.github.angeschossen.pluginframework.api.flags.Flag;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
