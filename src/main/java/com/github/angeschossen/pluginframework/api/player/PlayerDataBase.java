@@ -9,6 +9,8 @@ import java.util.UUID;
 
 public interface PlayerDataBase {
 
+    @NotNull String getName();
+
     Object sendMessage(String msg, String[] p, String[] v);
 
     @NotNull
