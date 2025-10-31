@@ -23,7 +23,7 @@ public class OfflineBlockCoordinate implements UnloadedPosition {
     }
 
     public OfflineBlockCoordinate(Position position) {
-        this(APIHandler.getInstance().getServerName(), position.world.getName(), position.x, position.y, position.z);
+        this(APIHandler.getInstance().getServerName(), position.world.getName(), position.x, position.y, position.z, position.getYaw(), position.getPitch());
     }
 
     public OfflineBlockCoordinate(String serverName, String worldName, double x, double y, double z, float yaw, float pitch) {

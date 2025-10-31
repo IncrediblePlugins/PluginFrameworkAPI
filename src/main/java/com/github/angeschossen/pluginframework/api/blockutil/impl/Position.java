@@ -16,6 +16,14 @@ public class Position extends BlockPosition {
         this.yaw = yaw;
     }
 
+    public float getPitch() {
+        return pitch;
+    }
+
+    public float getYaw() {
+        return yaw;
+    }
+
     public Position(Location location) {
         super(location);
 
