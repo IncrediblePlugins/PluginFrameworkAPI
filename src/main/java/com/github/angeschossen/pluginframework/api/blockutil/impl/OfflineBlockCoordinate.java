@@ -23,7 +23,7 @@ public class OfflineBlockCoordinate implements UnloadedPosition {
     }
 
     public OfflineBlockCoordinate(Position position) {
-        this(APIHandler.getInstance().getServerName(), position.world.getName(), position.x, position.y, position.z, position.getYaw(), position.getPitch());
+        this(APIHandler.getInstance().getServerName(), position.getWorld().getName(), position.getX(), position.getY(), position.getZ(), position.getYaw(), position.getPitch());
     }
 
     public OfflineBlockCoordinate(String serverName, String worldName, double x, double y, double z, float yaw, float pitch) {
@@ -34,6 +34,18 @@ public class OfflineBlockCoordinate implements UnloadedPosition {
         this.worldName = worldName;
         this.yaw = yaw;
         this.pitch = pitch;
+    }
+
+    @Override
+    public String toString() {
+        return "OfflineBlockCoordinate{" +
+                "world=" + worldName +
+                ",x=" + x +
+                ",y=" + y +
+                ",z=" + z +
+                ",yaw=" + yaw +
+                ",pitch=" + pitch +
+                "}";
     }
 
     @Override

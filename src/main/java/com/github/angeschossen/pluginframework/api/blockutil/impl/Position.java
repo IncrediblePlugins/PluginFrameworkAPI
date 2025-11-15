@@ -7,11 +7,18 @@ import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Position extends BlockPosition {
-    private final float yaw, pitch;
+import java.util.Objects;
 
-    public Position(World world, int x, int y, int z, float yaw, float pitch) {
-        super(world, x, y, z);
+public class Position implements com.github.angeschossen.pluginframework.api.blockutil.Position {
+    private final float yaw, pitch;
+    private final double x, y, z;
+    private final World world;
+
+    public Position(World world, double x, double y, double z, float yaw, float pitch) {
+        this.world = world;
+        this.x = x;
+        this.y = y;
+        this.z = z;
         this.pitch = pitch;
         this.yaw = yaw;
     }
@@ -25,10 +32,38 @@ public class Position extends BlockPosition {
     }
 
     public Position(Location location) {
-        super(location);
+        this(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+    }
 
-        this.yaw = location.getYaw();
-        this.pitch = location.getPitch();
+    @Override
+    public final int getChunkX() {
+        return (int) x >> 4;
+    }
+
+    @Override
+    public final int getChunkZ() {
+        return (int) z >> 4;
+    }
+
+    @NotNull
+    @Override
+    public final World getWorld() {
+        return world;
+    }
+
+    @Override
+    public final double getX() {
+        return x;
+    }
+
+    @Override
+    public final double getY() {
+        return y;
+    }
+
+    @Override
+    public final double getZ() {
+        return z;
     }
 
     @Nullable
@@ -38,19 +73,23 @@ public class Position extends BlockPosition {
             return null;
         }
 
-        return new Position(world, jsonObject.get("x").getAsInt(), jsonObject.get("y").getAsInt(), jsonObject.get("z").getAsInt(),
+        return new Position(world, jsonObject.get("x").getAsDouble(), jsonObject.get("y").getAsDouble(), jsonObject.get("z").getAsDouble(),
                 jsonObject.get("yaw").getAsFloat(), jsonObject.get("pitch").getAsFloat());
     }
 
     @Override
     public final boolean equals(Object object) {
-        if (!(object instanceof Position)) {
+        if (!(object instanceof Position coordinate)) {
             return false;
         }
 
-        Position coordinate = (Position) object;
         return coordinate.world.equals(this.world) && coordinate.x == x && coordinate.z == z && coordinate.y == y
                 && this.yaw == coordinate.yaw && this.pitch == coordinate.pitch;
+    }
+
+    @Override
+    public final boolean isChunkLoaded() {
+        return world.isChunkLoaded(getChunkX(), getChunkZ());
     }
 
     @NotNull
@@ -59,19 +98,18 @@ public class Position extends BlockPosition {
         return new Location(world, x, y, z, yaw, pitch);
     }
 
-
     @Override
     public final int hashCode() {
-        int hash = super.hashCode();
-        hash = hash * 31 + (int) yaw;
-        hash = hash * 31 + (int) pitch;
-        return hash;
+        return Objects.hash(world, x, y, z, yaw, pitch);
     }
 
-
     @NotNull
-    public final JsonObject toJson() {
-        JsonObject jsonObject = super.toJson();
+    public JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("world", world.getName());
+        jsonObject.addProperty("x", x);
+        jsonObject.addProperty("y", y);
+        jsonObject.addProperty("z", z);
         jsonObject.addProperty("yaw", yaw);
         jsonObject.addProperty("pitch", pitch);
         return jsonObject;
