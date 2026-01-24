@@ -5,4 +5,6 @@ import org.jetbrains.annotations.NotNull;
 public interface Limitation {
 
     @NotNull String getId();
+
+    boolean hasTarget(@NotNull LimitationTarget target);
 }
