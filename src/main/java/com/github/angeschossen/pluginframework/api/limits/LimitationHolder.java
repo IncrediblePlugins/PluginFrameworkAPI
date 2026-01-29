@@ -14,6 +14,15 @@ public interface LimitationHolder {
      */
     int getLimitation(@NotNull Limitation limitation);
 
+    /**
+     * Check if a new limit pack is available and set it.
+     *
+     * @return true, if limit pack changed
+     */
+    default boolean refreshLimitPack() {
+        return false;
+    }
+
     default @NotNull String getLimitationAsString(@NotNull Limitation limitation, @Nullable PlayerDataBase viewer) {
         final int value = getLimitation(limitation);
         if (value > 100000) {
