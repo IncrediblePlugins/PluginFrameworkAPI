@@ -14,12 +14,24 @@ public interface LimitHolder {
      * @param limit the specific limit
      * @return includes additional values given via the admin account or API, but does not include playtime rewards for offline players
      */
-    int getLimitation(@NotNull Limit limit);
+    int getLimit(@NotNull Limit limit);
 
-    default void onLimitationChanged(@NotNull Limit limit, int newLimitation) {
+    /**
+     * Trigger actions at holder if limit has changed.
+     *
+     * @param limit         the limit
+     * @param newLimitation new limit value
+     */
+    default void onLimitChanged(@NotNull Limit limit, int newLimitation) {
 
     }
 
+    /**
+     * Check if the holder has this specific limit pack.
+     *
+     * @param limitPack the pack
+     * @return true, if holder has the pack
+     */
     boolean hasLimitPack(@NotNull HolderLimitPack limitPack);
 
     /**
@@ -30,8 +42,15 @@ public interface LimitHolder {
 
     }
 
-    default @NotNull String getLimitationAsString(@NotNull Limit limit, @Nullable PlayerDataBase viewer) {
-        final int value = getLimitation(limit);
+    /**
+     * Get limitation as string for UI
+     *
+     * @param limit  the limit
+     * @param viewer viewer of the interface
+     * @return limit value as string
+     */
+    default @NotNull String getLimitAsString(@NotNull Limit limit, @Nullable PlayerDataBase viewer) {
+        final int value = getLimit(limit);
         if (value > 100000) {
             return APIHandler.getInstance().getLocaleHandler().getMessagesLocale(viewer).getString("value.unlimited");
         }
