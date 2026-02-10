@@ -35,16 +35,16 @@ public interface Limit {
     /**
      * Register modifier to limit.
      *
-     * @param modifier never null
+     * @param modifiers never null
      */
-    void registerModifier(@NotNull LimitModifier modifier);
+    void registerModifier(@NotNull LimitModifier... modifiers);
 
     /**
      * Remove modifier from limit.
      *
-     * @param modifier modifier to remove
+     * @param modifiers modifier to remove
      */
-    void unregisterModifier(@NotNull LimitModifier modifier);
+    void unregisterModifier(@NotNull LimitModifier... modifiers);
 
     /**
      * All modifiers that were registered for this limit.
