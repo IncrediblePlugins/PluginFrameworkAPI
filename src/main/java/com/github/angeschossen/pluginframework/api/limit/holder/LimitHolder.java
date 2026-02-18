@@ -7,6 +7,8 @@ import com.github.angeschossen.pluginframework.api.player.PlayerDataBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public interface LimitHolder {
     /**
      * Get a limitation value.
@@ -38,8 +40,9 @@ public interface LimitHolder {
      * Check if a new limit pack is available and set it.
      *
      */
-    default void refreshLimitPack() {
-
+    @NotNull
+    default CompletableFuture<HolderLimitPack> refreshLimitPack() {
+        return CompletableFuture.completedFuture(null);
     }
 
     /**
