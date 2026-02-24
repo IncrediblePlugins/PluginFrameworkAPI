@@ -45,6 +45,8 @@ public interface LimitHolder {
         return CompletableFuture.completedFuture(null);
     }
 
+    default void onLimitPackChanged(){}
+
     /**
      * Get limitation as string for UI
      *
