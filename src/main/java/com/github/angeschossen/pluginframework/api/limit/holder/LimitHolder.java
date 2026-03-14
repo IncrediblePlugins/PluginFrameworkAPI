@@ -10,13 +10,25 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public interface LimitHolder {
+
     /**
      * Get a limitation value.
      *
      * @param limit the specific limit
-     * @return includes additional values given via the admin account or API, but does not include playtime rewards for offline players
+     * @return includes additional values given via the admin account or API
      */
-    int getLimit(@NotNull Limit limit);
+    default int getLimit(@NotNull Limit limit) {
+        return getLimit(limit, true);
+    }
+
+    /**
+     * Get a limitation value.
+     *
+     * @param limit          the specific limit
+     * @param applyModifiers apply modifiers such as levels?
+     * @return includes additional values given via the admin command or API
+     */
+    int getLimit(@NotNull Limit limit, boolean applyModifiers);
 
     /**
      * Trigger actions at holder if limit has changed.
@@ -45,7 +57,8 @@ public interface LimitHolder {
         return CompletableFuture.completedFuture(null);
     }
 
-    default void onLimitPackChanged(){}
+    default void onLimitPackChanged() {
+    }
 
     /**
      * Get limitation as string for UI

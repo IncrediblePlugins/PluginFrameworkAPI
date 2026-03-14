@@ -1,6 +1,5 @@
 package com.github.angeschossen.pluginframework.api.blockutil.impl;
 
-import com.github.angeschossen.pluginframework.api.blockutil.UnloadedPosition;
 import com.github.angeschossen.pluginframework.api.handler.APIHandler;
 import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
@@ -11,22 +10,22 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class OfflineBlockCoordinate implements UnloadedPosition {
+public class UnloadedPosition implements com.github.angeschossen.pluginframework.api.blockutil.UnloadedPosition {
 
     private final String worldName;
     private final String serverName;
     private final float yaw, pitch;
     private final double x, y, z;
 
-    public OfflineBlockCoordinate(String serverName, String worldName, double x, double y, double z) {
+    public UnloadedPosition(String serverName, String worldName, double x, double y, double z) {
         this(serverName, worldName, x, y, z, 0, 0);
     }
 
-    public OfflineBlockCoordinate(Position position) {
+    public UnloadedPosition(Position position) {
         this(APIHandler.getInstance().getServerName(), position.getWorld().getName(), position.getX(), position.getY(), position.getZ(), position.getYaw(), position.getPitch());
     }
 
-    public OfflineBlockCoordinate(String serverName, String worldName, double x, double y, double z, float yaw, float pitch) {
+    public UnloadedPosition(String serverName, String worldName, double x, double y, double z, float yaw, float pitch) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -53,12 +52,12 @@ public class OfflineBlockCoordinate implements UnloadedPosition {
         return APIHandler.getInstance().getMultiPaperHandler().isTargetServer(serverName);
     }
 
-    public OfflineBlockCoordinate(@NotNull Location location) {
+    public UnloadedPosition(@NotNull Location location) {
         this(APIHandler.getInstance().getServerName(), location.getWorld().getName(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
-    public static OfflineBlockCoordinate fromJson(@NotNull JsonObject jsonObject) {
-        return new OfflineBlockCoordinate(jsonObject.has("server") ? jsonObject.get("server").getAsString() : APIHandler.getInstance().getServerName(), jsonObject.get("world").getAsString(), jsonObject.get("x").getAsDouble(), jsonObject.get("y").getAsDouble(), jsonObject.get("z").getAsDouble(), jsonObject.get("yaw").getAsFloat(), jsonObject.get("pitch").getAsFloat());
+    public static UnloadedPosition fromJson(@NotNull JsonObject jsonObject) {
+        return new UnloadedPosition(jsonObject.has("server") ? jsonObject.get("server").getAsString() : APIHandler.getInstance().getServerName(), jsonObject.get("world").getAsString(), jsonObject.get("x").getAsDouble(), jsonObject.get("y").getAsDouble(), jsonObject.get("z").getAsDouble(), jsonObject.get("yaw").getAsFloat(), jsonObject.get("pitch").getAsFloat());
     }
 
     public boolean equals(String serverName, World world, int x, int y, int z) {
