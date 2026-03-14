@@ -6,6 +6,16 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface UnloadedPosition {
+    @NotNull
+    static UnloadedPosition of(@NotNull Location location) {
+        return new com.github.angeschossen.pluginframework.api.blockutil.impl.UnloadedPosition(location);
+    }
+
+    @NotNull
+    static UnloadedPosition of(@NotNull String serverName, @NotNull String worldName, double x, double y, double z, float yaw, float pitch) {
+        return new com.github.angeschossen.pluginframework.api.blockutil.impl.UnloadedPosition(serverName, worldName, x, y, z, yaw, pitch);
+    }
+
     boolean isTargetServer();
 
     int getBlockX();
@@ -23,6 +33,8 @@ public interface UnloadedPosition {
 
     @Nullable
     World getWorld();
+
+    @NotNull World getWorldNotNull();
 
     @NotNull
     String getWorldName();

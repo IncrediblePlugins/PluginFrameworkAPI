@@ -1,6 +1,7 @@
 package com.github.angeschossen.pluginframework.api.blockutil.impl;
 
 import com.github.angeschossen.pluginframework.api.handler.APIHandler;
+import com.github.angeschossen.pluginframework.api.utils.Checks;
 import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -25,12 +26,12 @@ public class UnloadedPosition implements com.github.angeschossen.pluginframework
         this(APIHandler.getInstance().getServerName(), position.getWorld().getName(), position.getX(), position.getY(), position.getZ(), position.getYaw(), position.getPitch());
     }
 
-    public UnloadedPosition(String serverName, String worldName, double x, double y, double z, float yaw, float pitch) {
+    public UnloadedPosition(@NotNull String serverName, @NotNull String worldName, double x, double y, double z, float yaw, float pitch) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.serverName = serverName;
-        this.worldName = worldName;
+        this.serverName = Checks.requireNonNull(serverName, "serverName");
+        this.worldName = Checks.requireNonNull(worldName, "worldName");
         this.yaw = yaw;
         this.pitch = pitch;
     }
@@ -110,9 +111,9 @@ public class UnloadedPosition implements com.github.angeschossen.pluginframework
         return isTargetServer() ? Bukkit.getWorld(getWorldName()) : null;
     }
 
-    @NotNull
-    public final World getWorldNotNull() {
-        return Objects.requireNonNull(getWorld(), "expected world");
+    @Override
+    public final @NotNull World getWorldNotNull() {
+        return Objects.requireNonNull(getWorld(), "world is not loaded");
     }
 
     @Override
