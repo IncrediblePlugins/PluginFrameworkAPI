@@ -60,5 +60,5 @@ public interface Limit {
      *
      * @return all unique aliases in lower case
      */
-    @NotNull Set<String> getConfigAliases();
+    @NotNull Collection<String> getConfigAliases();
 }
