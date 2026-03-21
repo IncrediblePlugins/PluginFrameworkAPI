@@ -5,6 +5,7 @@ import com.github.angeschossen.pluginframework.api.limit.holder.LimitTarget;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Set;
 
 public interface Limit {
 
@@ -53,4 +54,11 @@ public interface Limit {
      */
     @NotNull
     Collection<@NotNull LimitModifier> getModifiers();
+
+    /**
+     * Limit name aliases are checked if the limit name was removed, to still support old names.
+     *
+     * @return all unique aliases in lower case
+     */
+    @NotNull Set<String> getConfigAliases();
 }
