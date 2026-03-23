@@ -58,7 +58,7 @@ public interface Limit {
     /**
      * Limit name aliases are checked if the limit name was removed, to still support old names.
      *
-     * @return all unique aliases in lower case
+     * @return all unique aliases
      */
     @NotNull Collection<String> getConfigAliases();
 }
