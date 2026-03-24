@@ -9,6 +9,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Implemented by objects (typically players or groups) that are subject to {@link Limit}s.
+ * The holder's effective limit value is the base value plus any applicable {@link LimitModifier}s.
+ */
 public interface LimitHolder {
 
     /**

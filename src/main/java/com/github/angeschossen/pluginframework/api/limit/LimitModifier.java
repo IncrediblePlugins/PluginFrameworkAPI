@@ -3,6 +3,10 @@ package com.github.angeschossen.pluginframework.api.limit;
 import com.github.angeschossen.pluginframework.api.limit.holder.LimitHolder;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Adds extra capacity to a {@link Limit} for specific {@link LimitHolder}s.
+ * For example, a permission-based modifier could grant VIP players additional claims.
+ */
 public interface LimitModifier {
     /**
      * Get unique ID of the modifier.
