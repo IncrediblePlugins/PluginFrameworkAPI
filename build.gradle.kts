@@ -134,12 +134,8 @@ publishing {
     repositories {
         maven {
             name = "nexus"
-            val isSnapshot = version.toString().endsWith("-SNAPSHOT")
             url = uri(
-                if (isSnapshot)
-                    "https://nexus.incredibleplugins.com/repository/maven-snapshots/"
-                else
-                    "https://nexus.incredibleplugins.com/repository/plugin-maven-releases/"
+                "https://nexus.incredibleplugins.com/repository/plugin-maven-public/"
             )
             credentials {
                 username = project.findProperty("nexusUsername") as String? ?: System.getenv("NEXUS_USERNAME")

@@ -3,6 +3,9 @@ package com.github.angeschossen.pluginframework.api.trusted.group;
 import com.github.angeschossen.pluginframework.api.trusted.RoleHolder;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Represents a named group of protections that share a common set of trusted players and roles.
+ */
 public interface Group extends RoleHolder {
     /**
      * Check if the group is the default group.
