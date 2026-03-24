@@ -5,6 +5,11 @@ package com.github.angeschossen.pluginframework.api.exceptions;
  */
 public class NoAccessException extends RuntimeException {
 
+    /**
+     * Creates a new exception with the given detail message.
+     *
+     * @param errorMessage the detail message
+     */
     public NoAccessException(String errorMessage) {
         super(errorMessage);
     }

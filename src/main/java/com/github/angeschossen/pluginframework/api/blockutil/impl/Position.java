@@ -9,11 +9,24 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Immutable position in a loaded world, including precise (double) coordinates, yaw, and pitch.
+ */
 public class Position implements com.github.angeschossen.pluginframework.api.blockutil.Position {
     private final float yaw, pitch;
     private final double x, y, z;
     private final World world;
 
+    /**
+     * Creates a new position with the given world, coordinates, and rotation.
+     *
+     * @param world the world
+     * @param x     the x-coordinate
+     * @param y     the y-coordinate
+     * @param z     the z-coordinate
+     * @param yaw   the yaw rotation
+     * @param pitch the pitch rotation
+     */
     public Position(World world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
         this.x = x;
@@ -23,14 +36,29 @@ public class Position implements com.github.angeschossen.pluginframework.api.blo
         this.yaw = yaw;
     }
 
+    /**
+     * Returns the pitch rotation of this position.
+     *
+     * @return the pitch
+     */
     public float getPitch() {
         return pitch;
     }
 
+    /**
+     * Returns the yaw rotation of this position.
+     *
+     * @return the yaw
+     */
     public float getYaw() {
         return yaw;
     }
 
+    /**
+     * Creates a new position from the given Bukkit location.
+     *
+     * @param location the location to copy coordinates and rotation from
+     */
     public Position(Location location) {
         this(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
@@ -66,6 +94,13 @@ public class Position implements com.github.angeschossen.pluginframework.api.blo
         return z;
     }
 
+    /**
+     * Deserializes a {@code Position} from a JSON object.
+     * Returns {@code null} if the world specified in the JSON is not loaded.
+     *
+     * @param jsonObject the JSON object containing world, x, y, z, yaw, and pitch fields
+     * @return the deserialized position, or {@code null} if the world is not loaded
+     */
     @Nullable
     public static Position fromJson(JsonObject jsonObject) {
         World world = Bukkit.getWorld(jsonObject.get("world").getAsString());
@@ -103,6 +138,11 @@ public class Position implements com.github.angeschossen.pluginframework.api.blo
         return Objects.hash(world, x, y, z, yaw, pitch);
     }
 
+    /**
+     * Serializes this position to a JSON object with world, x, y, z, yaw, and pitch fields.
+     *
+     * @return a JSON representation of this position
+     */
     @NotNull
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();

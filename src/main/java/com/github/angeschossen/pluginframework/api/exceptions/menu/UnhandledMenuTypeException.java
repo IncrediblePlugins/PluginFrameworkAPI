@@ -5,6 +5,9 @@ package com.github.angeschossen.pluginframework.api.exceptions.menu;
  */
 public class UnhandledMenuTypeException extends RuntimeException {
 
+    /**
+     * Creates a new exception with the default message {@code "Unhandled menu type"}.
+     */
     public UnhandledMenuTypeException() {
         super("Unhandled menu type");
     }

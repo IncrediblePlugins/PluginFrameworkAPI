@@ -6,6 +6,11 @@ package com.github.angeschossen.pluginframework.api.exceptions;
  */
 public class IllegalUntrustException extends RuntimeException {
 
+    /**
+     * Creates a new exception with the given detail message.
+     *
+     * @param errorMessage the detail message
+     */
     public IllegalUntrustException(String errorMessage) {
         super(errorMessage);
     }

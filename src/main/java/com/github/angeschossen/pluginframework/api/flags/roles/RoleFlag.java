@@ -17,7 +17,9 @@ import org.jetbrains.annotations.Nullable;
  */
 public abstract class RoleFlag {
 
+    /** The plugin that registered this flag. */
     protected final @NotNull Plugin plugin;
+    /** The unique, lowercase name of this flag. */
     protected final @NotNull String name;
 
     /**

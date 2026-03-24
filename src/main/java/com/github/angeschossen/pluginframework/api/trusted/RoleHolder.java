@@ -124,7 +124,8 @@ public interface RoleHolder {
     /**
      * Untrust a player that is trusted directly to this protection.
      *
-     * @param playerUUID The player to untrust
+     * @param playerUUID the player to untrust
+     * @return {@code true} if the player was untrusted; {@code false} if they were not trusted
      */
     boolean untrustPlayer(@NotNull UUID playerUUID);
 }

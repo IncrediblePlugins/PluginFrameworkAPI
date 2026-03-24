@@ -5,6 +5,11 @@ package com.github.angeschossen.pluginframework.api.exceptions;
  */
 public class NameAlreadyTakenException extends RuntimeException {
 
+    /**
+     * Creates a new exception with the given detail message.
+     *
+     * @param errorMessage the detail message
+     */
     public NameAlreadyTakenException(String errorMessage) {
         super(errorMessage);
     }
