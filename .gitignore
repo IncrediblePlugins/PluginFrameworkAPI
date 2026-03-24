@@ -2,3 +2,5 @@
 /target/
 /.idea/
 /build
+gradle.properties
+CLAUDE.md
