@@ -10,6 +10,12 @@ import java.util.Objects;
 public class Checks {
 
     /**
+     * Private constructor — utility class, not instantiable.
+     */
+    private Checks() {
+    }
+
+    /**
      * Ensures the given object is not {@code null}.
      *
      * @param o   the object to check

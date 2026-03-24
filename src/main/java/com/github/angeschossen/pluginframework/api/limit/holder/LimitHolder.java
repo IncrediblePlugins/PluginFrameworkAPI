@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * Implemented by objects (typically players or groups) that are subject to {@link Limit}s.
- * The holder's effective limit value is the base value plus any applicable {@link LimitModifier}s.
+ * The holder's effective limit value is the base value plus any applicable {@link com.github.angeschossen.pluginframework.api.limit.LimitModifier}s.
  */
 public interface LimitHolder {
 
@@ -53,14 +53,19 @@ public interface LimitHolder {
     boolean hasLimitPack(@NotNull HolderLimitPack limitPack);
 
     /**
-     * Check if a new limit pack is available and set it.
+     * Checks whether a new limit pack is available for this holder and applies it if so.
      *
+     * @return a future that resolves to the holder's current {@link HolderLimitPack}
      */
     @NotNull
     default CompletableFuture<HolderLimitPack> refreshLimitPack() {
         return CompletableFuture.completedFuture(null);
     }
 
+    /**
+     * Called when this holder's limit pack has changed.
+     * Override to react to pack changes, for example to refresh cached limit values.
+     */
     default void onLimitPackChanged() {
     }
 

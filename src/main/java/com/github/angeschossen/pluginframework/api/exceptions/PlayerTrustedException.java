@@ -5,6 +5,11 @@ package com.github.angeschossen.pluginframework.api.exceptions;
  */
 public class PlayerTrustedException extends RuntimeException {
 
+    /**
+     * Creates a new exception with the given detail message.
+     *
+     * @param errorMessage the detail message
+     */
     public PlayerTrustedException(String errorMessage) {
         super(errorMessage);
     }

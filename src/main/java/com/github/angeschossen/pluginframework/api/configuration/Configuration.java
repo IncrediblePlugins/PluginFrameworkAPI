@@ -5,6 +5,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
+/**
+ * Provides read access to plugin configuration values by key.
+ */
 public interface Configuration {
 
     /**

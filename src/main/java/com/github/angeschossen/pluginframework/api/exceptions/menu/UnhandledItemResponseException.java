@@ -5,6 +5,9 @@ package com.github.angeschossen.pluginframework.api.exceptions.menu;
  */
 public class UnhandledItemResponseException extends RuntimeException {
 
+    /**
+     * Creates a new exception with the default message {@code "Unhandled item response"}.
+     */
     public UnhandledItemResponseException() {
         super("Unhandled item response");
     }

@@ -11,6 +11,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Position that may reference a world or server that is not currently loaded.
+ * Coordinates are stored by name so they survive world unloads and server restarts.
+ */
 public class UnloadedPosition implements com.github.angeschossen.pluginframework.api.blockutil.UnloadedPosition {
 
     private final String worldName;
@@ -18,14 +22,40 @@ public class UnloadedPosition implements com.github.angeschossen.pluginframework
     private final float yaw, pitch;
     private final double x, y, z;
 
+    /**
+     * Creates a new unloaded position without rotation (yaw and pitch default to 0).
+     *
+     * @param serverName the name of the target server
+     * @param worldName  the name of the world
+     * @param x          the x-coordinate
+     * @param y          the y-coordinate
+     * @param z          the z-coordinate
+     */
     public UnloadedPosition(String serverName, String worldName, double x, double y, double z) {
         this(serverName, worldName, x, y, z, 0, 0);
     }
 
+    /**
+     * Creates a new unloaded position from a loaded {@link Position}.
+     * The server name is resolved from the current {@link APIHandler} instance.
+     *
+     * @param position the loaded position to convert
+     */
     public UnloadedPosition(Position position) {
         this(APIHandler.getInstance().getServerName(), position.getWorld().getName(), position.getX(), position.getY(), position.getZ(), position.getYaw(), position.getPitch());
     }
 
+    /**
+     * Creates a new unloaded position with all fields explicitly specified.
+     *
+     * @param serverName the name of the target server
+     * @param worldName  the name of the world
+     * @param x          the x-coordinate
+     * @param y          the y-coordinate
+     * @param z          the z-coordinate
+     * @param yaw        the yaw rotation
+     * @param pitch      the pitch rotation
+     */
     public UnloadedPosition(@NotNull String serverName, @NotNull String worldName, double x, double y, double z, float yaw, float pitch) {
         this.x = x;
         this.y = y;
@@ -53,14 +83,36 @@ public class UnloadedPosition implements com.github.angeschossen.pluginframework
         return APIHandler.getInstance().getMultiPaperHandler().isTargetServer(serverName);
     }
 
+    /**
+     * Creates a new unloaded position from a Bukkit {@link Location}.
+     * The server name is resolved from the current {@link APIHandler} instance.
+     *
+     * @param location the location to convert
+     */
     public UnloadedPosition(@NotNull Location location) {
         this(APIHandler.getInstance().getServerName(), location.getWorld().getName(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
+    /**
+     * Deserializes an {@code UnloadedPosition} from a JSON object.
+     *
+     * @param jsonObject the JSON object containing server, world, x, y, z, yaw, and pitch fields
+     * @return the deserialized position
+     */
     public static UnloadedPosition fromJson(@NotNull JsonObject jsonObject) {
         return new UnloadedPosition(jsonObject.has("server") ? jsonObject.get("server").getAsString() : APIHandler.getInstance().getServerName(), jsonObject.get("world").getAsString(), jsonObject.get("x").getAsDouble(), jsonObject.get("y").getAsDouble(), jsonObject.get("z").getAsDouble(), jsonObject.get("yaw").getAsFloat(), jsonObject.get("pitch").getAsFloat());
     }
 
+    /**
+     * Checks whether this position matches the given server name, world, and block coordinates.
+     *
+     * @param serverName the server name to compare
+     * @param world      the world to compare
+     * @param x          the x-coordinate
+     * @param y          the y-coordinate
+     * @param z          the z-coordinate
+     * @return {@code true} if server, world, and all coordinates match
+     */
     public boolean equals(String serverName, World world, int x, int y, int z) {
         if (!serverName.equals(this.serverName) || !world.equals(getWorld())) {
             return false;
@@ -176,6 +228,11 @@ public class UnloadedPosition implements com.github.angeschossen.pluginframework
         return isTargetServer() && worldName.equalsIgnoreCase(this.worldName);
     }
 
+    /**
+     * Serializes this position to a JSON object with server, world, x, y, z, yaw, and pitch fields.
+     *
+     * @return a JSON representation of this position
+     */
     public JsonObject toJsonObject() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("server", serverName);

@@ -6,6 +6,11 @@ package com.github.angeschossen.pluginframework.api.exceptions;
  */
 public class RolePriorityException extends RuntimeException {
 
+    /**
+     * Creates a new exception with the given detail message.
+     *
+     * @param errorMessage the detail message
+     */
     public RolePriorityException(String errorMessage) {
         super(errorMessage);
     }

@@ -8,10 +8,27 @@ import org.bukkit.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Immutable block position consisting of a world and integer block coordinates.
+ */
 public class BlockPosition implements com.github.angeschossen.pluginframework.api.blockutil.BlockPosition {
+    /** The world this position belongs to. */
     public final World world;
-    public final int x, y, z;
+    /** The x-coordinate of the block. */
+    public final int x;
+    /** The y-coordinate of the block. */
+    public final int y;
+    /** The z-coordinate of the block. */
+    public final int z;
 
+    /**
+     * Creates a new position with the given world and block coordinates.
+     *
+     * @param world the world
+     * @param x     the x-coordinate
+     * @param y     the y-coordinate
+     * @param z     the z-coordinate
+     */
     public BlockPosition(World world, int x, int y, int z) {
         this.world = world;
         this.x = x;
@@ -19,15 +36,32 @@ public class BlockPosition implements com.github.angeschossen.pluginframework.ap
         this.z = z;
     }
 
+    /**
+     * Returns the block at this position in the world.
+     *
+     * @return the block at this position
+     */
     @NotNull
     public final Block getBlock() {
         return world.getBlockAt(x, y, z);
     }
 
+    /**
+     * Creates a new position from the given Bukkit location.
+     *
+     * @param location the location whose world and block coordinates are used
+     */
     public BlockPosition(Location location) {
         this(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 
+    /**
+     * Deserializes a {@code BlockPosition} from a JSON object.
+     * Returns {@code null} if the world specified in the JSON is not loaded.
+     *
+     * @param jsonObject the JSON object containing world, x, y, z fields
+     * @return the deserialized position, or {@code null} if the world is not loaded
+     */
     @Nullable
     public static BlockPosition fromJson(JsonObject jsonObject) {
         World world = Bukkit.getWorld(jsonObject.get("world").getAsString());
@@ -38,6 +72,15 @@ public class BlockPosition implements com.github.angeschossen.pluginframework.ap
         return new BlockPosition(world, jsonObject.get("x").getAsInt(), jsonObject.get("y").getAsInt(), jsonObject.get("z").getAsInt());
     }
 
+    /**
+     * Checks whether this position matches the given world and block coordinates.
+     *
+     * @param world the world to compare
+     * @param x     the x-coordinate
+     * @param y     the y-coordinate
+     * @param z     the z-coordinate
+     * @return {@code true} if world and all coordinates match
+     */
     public final boolean equals(World world, int x, int y, int z) {
         return this.world.equals(world) && this.x == x && this.y == y && this.z == z;
     }
@@ -52,6 +95,14 @@ public class BlockPosition implements com.github.angeschossen.pluginframework.ap
         return coordinate.world.equals(this.world) && coordinate.x == x && coordinate.z == z && coordinate.y == y;
     }
 
+    /**
+     * Checks whether this position's coordinates match the given values, ignoring world.
+     *
+     * @param x the x-coordinate
+     * @param y the y-coordinate
+     * @param z the z-coordinate
+     * @return {@code true} if all three coordinates match
+     */
     public final boolean equals(int x, int y, int z) {
         return this.x == x && this.z == z && this.y == y;
     }
@@ -107,6 +158,11 @@ public class BlockPosition implements com.github.angeschossen.pluginframework.ap
         return world.isChunkLoaded(x >> 4, z >> 4);
     }
 
+    /**
+     * Serializes this position to a JSON object with world, x, y, and z fields.
+     *
+     * @return a JSON representation of this position
+     */
     @NotNull
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();

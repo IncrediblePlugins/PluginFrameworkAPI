@@ -18,6 +18,9 @@ import java.util.UUID;
  */
 public abstract class PluginEvent extends Event {
 
+    /**
+     * Creates a new event, automatically detecting whether it is fired asynchronously.
+     */
     public PluginEvent() {
         super(!Bukkit.isPrimaryThread());
     }
