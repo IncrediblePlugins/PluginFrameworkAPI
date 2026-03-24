@@ -7,12 +7,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * Represents a named limitation that can be applied to {@link LimitHolder}s.
+ * Limits cap the number of something a holder is allowed to have or do (e.g. maximum claims).
+ * Their base value can be extended via {@link LimitModifier}s registered by plugins.
+ */
 public interface Limit {
 
     /**
-     * Get unique ID of the limit.
+     * Gets the unique string identifier for this limit.
      *
-     * @return unique ID
+     * @return the limit ID
      */
     @NotNull String getId();
 
